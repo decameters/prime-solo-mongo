@@ -1,0 +1,41 @@
+// 1. Create a collection named orders.
+db.createCollection('orders');
+
+// 2. Insert at least 3 documents that represent an order.
+orders.insert({orderDate: "1986-09-04", 
+orderTotal: 50, 
+lineItems: {unitPrice: 10, 
+	quantity: 5, 
+	productName: 'Frozen Pizzas'}
+});
+
+orders.insert({orderDate: "1990-03-13", 
+orderTotal: 1000, 
+lineItems: {unitPrice: 500, 
+	quantity: 2, 
+	productName: 'Purebred Dog'}
+});
+
+orders.insert({orderDate: "1998-08-26", 
+orderTotal: 400.50, 
+lineItems: {unitPrice: 80.10, 
+    quantity: 5, 
+    productName: 'Spaghetti-Ohs'}
+});
+
+// 3. Find a single order document, any order document.
+orders.find({_id: ObjectId("5a2969f6f55761546934c114")});
+
+// 4. Find all orders and make them look pretty.
+orders.find().pretty();
+
+// 5. Find all orders with an orderDate that is prior to 1/1/2016.
+orders.find({orderDate: { "$lt": ("2016-01-01") }});
+
+// 6. Find all orders with an orderDate that is after 1/1/2016.
+orders.find({orderDate: { "$gt": ("2016-01-01") }});
+
+// 7. Find orders with lineItems that have a quantity that is less than 50, but greater than 5.
+orders.find({"lineItems.quantity" : {$lte: 50, $gte: 5}});
+
+
